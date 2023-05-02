@@ -3,12 +3,17 @@
     padding: 0;
     margin: 0;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 
 .container {
     display: flex;
     flex-direction: column;
     min-width: 360px;
     max-width: 2560px;
+    padding-top: 4px;
 }
 
 .field table {
@@ -18,11 +23,37 @@
 }
 
 .header {
-    margin: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .header h1 {
     font-size: 1.5rem;
     color: dimgray;
+    margin-right: 4px;
+}
+.header label {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.header form input {
+    width: 43px;
+    text-align: center;
+    padding: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    margin-top: 6px;
+
+}
+.header form button {
+    width: 78px;
+    text-align: center;
+    padding: 4px;
+    margin: 6px;
+    /*margin-left: 8px;*/
+    /*margin-right: 8px;*/
+    font-size: 0.8rem;
 }
 .cell {
     border: 1px solid grey;

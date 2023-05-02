@@ -1,11 +1,12 @@
 import {gameState} from "./config.js"
 import {table} from "./main.js";
-const {minCellSize, interval, cellClass, deadColor, aliveColor, numCols, numRows} = gameState
-export const initialTable = () => {
+
+const {minCellSize, cellClass, deadColor, aliveColor, numCols, numRows} = gameState
+export const initialTable = (isRandom) => {
     for (let i = 0; i < numRows; i++) {
         table[i] = [];
         for (let j = 0; j < numCols; j++) {
-            table[i][j] = Math.round(Math.random()); // Случайное начальное состояние
+            table[i][j] = isRandom ? Math.round(Math.random()) : 0;
         }
     }
 }
@@ -14,6 +15,16 @@ export const initialField = () => {
     const size = (clientWidth - 20) / numCols - 2
     const cellSize = size > minCellSize ? size + "px" : minCellSize + "px"
     const field = document.querySelector(".field");
+
+    const aliveState = document.getElementById("aliveState");
+    if (aliveState) {
+        aliveState.remove()
+    }
+    const deadState = document.getElementById("deadState");
+    if (deadState) {
+        deadState.remove()
+    }
+
     const tableAlive = document.createElement("table");
     tableAlive.id = "aliveState";
     const tableDead = document.createElement("table");
@@ -38,12 +49,19 @@ export const initialField = () => {
             cellDead.style.minHeight = cellSize
             cellDead.style.backgroundColor = deadColor;
 
+            // if (table[i][j]) {
+            //     cellDead.style.visibility = "hidden";
+            //     cellAlive.style.visibility = "visible";
+            // } else {
+            //     cellDead.style.visibility = "visible";
+            //     cellAlive.style.visibility = "hidden";
+            // }
             if (table[i][j]) {
-                cellDead.style.visibility = "hidden";
-                cellAlive.style.visibility = "visible";
+                cellDead.style.opacity = "0";
+                cellAlive.style.opacity = "1";
             } else {
-                cellDead.style.visibility = "visible";
-                cellAlive.style.visibility = "hidden";
+                cellDead.style.opacity = "1";
+                cellAlive.style.opacity = "0";
             }
         }
     }
@@ -58,12 +76,12 @@ export const renderField = (newState) => {
     for (let i = 0; i < numRows; i++) {
         for (let j = 0; j < numCols; j++) {
             if (newState[i][j] !== table[i][j]) {
-                deadState.rows[i].cells[j].style.visibility = newState[i][j]
-                    ? "hidden"
-                    : "visible";
-                aliveState.rows[i].cells[j].style.visibility = newState[i][j]
-                    ? "visible"
-                    : "hidden";
+                deadState.rows[i].cells[j].style.opacity = newState[i][j]
+                    ? "0"
+                    : "1";
+                aliveState.rows[i].cells[j].style.opacity = newState[i][j]
+                    ? "1"
+                    : "0";
             }
         }
     }
