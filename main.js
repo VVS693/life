@@ -26,6 +26,7 @@ const startGame = () => {
   isPlaying = true;
   initialData[0][0].disabled = true;
   initialData[0][1].disabled = true;
+  initialData[0][2].disabled = true;
   initialData[0][3].disabled = true;
   field.removeEventListener("click", tableFillHandle);
 
@@ -43,6 +44,7 @@ const stopGame = () => {
   intervalId = null;
   initialData[0][0].disabled = false;
   initialData[0][1].disabled = false;
+  initialData[0][2].disabled = false;
   initialData[0][3].disabled = false;
   field.addEventListener("click", tableFillHandle);
 };
@@ -68,9 +70,7 @@ const tableFillHandle = (event) => {
 };
 
 const intervalChangeHandle = (event) => {
-  stopGame();
   gameState.interval = event.target.value;
-  startGame();
 };
 
 const gameGoHandle = () => {
