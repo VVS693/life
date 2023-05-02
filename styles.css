@@ -1,60 +1,62 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
-
 .container {
-    display: flex;
-    flex-direction: column;
-    min-width: 360px;
-    max-width: 2560px;
-    padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  min-width: 360px;
+  max-width: 2560px;
+  padding-top: 4px;
 }
-
 .field table {
-    position: absolute;
-    margin-left: 10px;
-    margin-right: 10px;
+  position: absolute;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-
 .header {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    margin-right: 10px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .header h1 {
-    font-size: 1.5rem;
-    color: dimgray;
-    margin-right: 4px;
+  font-size: 1.5rem;
+  color: dimgray;
+  margin-right: 4px;
+}
+.header form {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.header form div {
+  margin: 4px;
 }
 .header label {
-    margin-left: 4px;
-    margin-right: 4px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .header form input {
-    width: 43px;
-    text-align: center;
-    padding: 4px;
-    font-size: 0.8rem;
-    margin-bottom: 8px;
-    margin-top: 6px;
-
+  width: 43px;
+  text-align: center;
+  padding: 4px;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  margin-top: 6px;
 }
 .header form button {
-    width: 78px;
-    text-align: center;
-    padding: 4px;
-    margin: 6px;
-    /*margin-left: 8px;*/
-    /*margin-right: 8px;*/
-    font-size: 0.8rem;
+  width: 80px;
+  text-align: center;
+  padding: 4px;
+  margin: 8px;
+  font-size: 0.8rem;
 }
 .cell {
-    border: 1px solid grey;
+  border: 1px solid grey;
 }
