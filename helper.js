@@ -79,29 +79,14 @@ export const renderField = (newState) => {
 export const nextGeneration = (state) => {
     const numRows = state.length;
     const numCols = state[0].length;
-    const checkBorders = (row, col) => {
-        return row >= 0 && col >= 0 && row < numRows && col < numCols;
-    };
     const countAliveNeighbours = (row, col) => {
         let count = 0;
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 if (i === 0 && j === 0) continue;
-                let newRow = row + i;
-                let newCol = col + j;
-                if (newRow >= numRows) {
-                    newRow = 0
-                }
-                if (newRow < 0) {
-                    newRow = numRows - 1
-                }
-                if (newCol >= numCols) {
-                    newCol = 0
-                }
-                if (newCol < 0) {
-                    newCol = numCols - 1
-                }
-                if (checkBorders(newRow, newCol) && state[newRow][newCol]) {
+                const newRow = (row + i + numRows) % numRows;
+                const newCol = (col + j + numCols) % numCols;
+                if (state[newRow][newCol]) {
                     count++;
                 }
             }
