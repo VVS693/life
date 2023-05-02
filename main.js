@@ -18,7 +18,13 @@ initialData[0][1].value = gameState.numRows;
 initialData[0][2].value = gameState.interval;
 const gen = document.getElementById("generation");
 
+const reset = () => {
+    table = []
+    generation = 0
+    gen.innerHTML = "Gen: " + generation;
+}
 const randomButtonHandle = () => {
+    reset()
     initialTable(true);
     initialField();
 };
@@ -80,14 +86,15 @@ const gameGoHandle = () => {
         initialData[0][4].innerHTML = "Pause";
     }
 };
+
 const fieldColsHandle = (event) => {
-    table = []
+    reset()
     gameState.numCols = event.target.value;
     initialTable(false);
     initialField();
 };
 const fieldRowsHandle = (event) => {
-    table = []
+    reset()
     gameState.numRows = event.target.value;
     initialTable(false);
     initialField();
