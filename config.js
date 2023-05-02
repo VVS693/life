@@ -1,7 +1,7 @@
 export const gameState = {
-  numRows: 10,
-  numCols: 10,
-  interval: 200,
+  numRows: 50,
+  numCols: 50,
+  interval: 100,
   aliveColor: "#01579b",
   deadColor: "white",
   cellClass: "cell",
