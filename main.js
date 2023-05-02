@@ -1,10 +1,10 @@
 import {
-  initialField,
-  initialTable,
-  nextGeneration,
-  renderField,
+    initialField,
+    initialTable,
+    nextGeneration,
+    renderField,
 } from "./helper.js";
-import { gameState } from "./config.js";
+import {gameState} from "./config.js";
 
 export let table = [];
 let intervalId = null;
@@ -19,79 +19,78 @@ initialData[0][2].value = gameState.interval;
 const gen = document.getElementById("generation");
 
 const randomButtonHandle = () => {
-  initialTable(true);
-  initialField();
+    initialTable(true);
+    initialField();
 };
 const startGame = () => {
-  isPlaying = true;
-  initialData[0][0].disabled = true;
-  initialData[0][1].disabled = true;
-  initialData[0][2].disabled = true;
-  initialData[0][3].disabled = true;
-  field.removeEventListener("click", tableFillHandle);
+    isPlaying = true;
+    initialData[0][0].disabled = true;
+    initialData[0][1].disabled = true;
+    initialData[0][2].disabled = true;
+    initialData[0][3].disabled = true;
+    field.removeEventListener("click", tableFillHandle);
 
-  intervalId = setInterval(() => {
-    const newTable = nextGeneration(table);
-    renderField(newTable);
-    table = newTable;
-    generation++;
-    gen.innerHTML = "Gen: " + generation;
-  }, gameState.interval);
+    intervalId = setInterval(() => {
+        const newTable = nextGeneration(table);
+        renderField(newTable);
+        table = newTable;
+        generation++;
+        gen.innerHTML = "Gen: " + generation;
+    }, gameState.interval);
 };
 const stopGame = () => {
-  isPlaying = false;
-  clearInterval(intervalId);
-  intervalId = null;
-  initialData[0][0].disabled = false;
-  initialData[0][1].disabled = false;
-  initialData[0][2].disabled = false;
-  initialData[0][3].disabled = false;
-  field.addEventListener("click", tableFillHandle);
+    isPlaying = false;
+    clearInterval(intervalId);
+    intervalId = null;
+    initialData[0][0].disabled = false;
+    initialData[0][1].disabled = false;
+    initialData[0][2].disabled = false;
+    initialData[0][3].disabled = false;
+    field.addEventListener("click", tableFillHandle);
 };
 
 const tableFillHandle = (event) => {
-  const cell = event.target;
-  const cellTag = cell.tagName.toLowerCase();
-  if (cellTag != "td") {
-    return;
-  }
-  const i = cell.parentNode.rowIndex;
-  const j = cell.cellIndex;
-  table[i][j] = table[i][j] ? 0 : 1;
-  const aliveState = document.getElementById("aliveState");
-  const deadState = document.getElementById("deadState");
-  if (table[i][j]) {
-    deadState.rows[i].cells[j].style.opacity = "0";
-    aliveState.rows[i].cells[j].style.opacity = "1";
-  } else {
-    aliveState.rows[i].cells[j].style.opacity = "0";
-    deadState.rows[i].cells[j].style.opacity = "1";
-  }
+    const cell = event.target;
+    const cellTag = cell.tagName.toLowerCase();
+    if (cellTag != "td") {
+        return;
+    }
+    const i = cell.parentNode.rowIndex;
+    const j = cell.cellIndex;
+    table[i][j] = table[i][j] ? 0 : 1;
+    const aliveState = document.getElementById("aliveState");
+    const deadState = document.getElementById("deadState");
+    if (table[i][j]) {
+        deadState.rows[i].cells[j].style.opacity = "0";
+        aliveState.rows[i].cells[j].style.opacity = "1";
+    } else {
+        aliveState.rows[i].cells[j].style.opacity = "0";
+        deadState.rows[i].cells[j].style.opacity = "1";
+    }
 };
-
 const intervalChangeHandle = (event) => {
-  gameState.interval = event.target.value;
+    gameState.interval = event.target.value;
 };
-
 const gameGoHandle = () => {
-  if (isPlaying) {
-    stopGame();
-    initialData[0][4].innerHTML = "Play";
-  } else {
-    startGame();
-    initialData[0][4].innerHTML = "Pause";
-  }
+    if (isPlaying) {
+        stopGame();
+        initialData[0][4].innerHTML = "Play";
+    } else {
+        startGame();
+        initialData[0][4].innerHTML = "Pause";
+    }
 };
-
 const fieldColsHandle = (event) => {
-  gameState.numCols = event.target.value;
-  initialTable(false);
-  initialField();
+    table = []
+    gameState.numCols = event.target.value;
+    initialTable(false);
+    initialField();
 };
 const fieldRowsHandle = (event) => {
-  gameState.numRows = event.target.value;
-  initialTable(false);
-  initialField();
+    table = []
+    gameState.numRows = event.target.value;
+    initialTable(false);
+    initialField();
 };
 
 field.addEventListener("click", tableFillHandle);
