@@ -9,7 +9,7 @@ export const initialTable = (isRandom) => {
     }
   }
 };
-export const initialField = () => {
+export function initialField() {
   const field = document.querySelector(".field");
   const clientRatio = window.innerWidth / document.documentElement.clientHeight;
   let size;
@@ -72,7 +72,7 @@ export const initialField = () => {
   field.append(tableAlive);
   field.append(tableDead);
 };
-export const renderField = (newState) => {
+export let renderField = (newState) => {
   const aliveState = document.getElementById("aliveState");
   const deadState = document.getElementById("deadState");
 
@@ -119,3 +119,18 @@ export const nextGeneration = (state) => {
   }
   return newState;
 };
+
+
+const timerWrapper = (fn) => {
+
+  return function() {
+    const timeStart = Date.now();
+    fn.apply(this, [...arguments])
+    const timeFinish = Date.now();
+    console.log(`Render Time ${timeFinish - timeStart}`);
+  }
+  
+}
+initialField = timerWrapper(initialField)
+
+renderField = timerWrapper(renderField)
